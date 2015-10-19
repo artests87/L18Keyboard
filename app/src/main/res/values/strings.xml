@@ -4,4 +4,14 @@
     <string name="titleDialogBack">Exit:Are you sure?</string>
     <string name="yes">Yes!</string>
     <string name="no">Nine!</string>
+    <string name="doubleExit">Press click exit again to exit!</string>
+    <string name="menuPressButton">You have pressed menu button!</string>
+    <string name="searchPressButton">You have pressed search!</string>
+    <string name="volumeUpPressButton">You have press volume up!</string>
+    <string name="volumeDownPressButton">You have pressed volume down!</string>
+    <string name="menuPressButtonLong">You have long pressed menu!</string>
+    <string name="searchPressButtonLong">You have pressed long search!</string>
+    <string name="volumeUpPressButtonLong">You have pressed long  VUP!</string>
+    <string name="volumeDownPressButtonLong">You have pressed long VDOWN!</string>
+    <string name="focusMessage">You have got focus!!</string>
 </resources>

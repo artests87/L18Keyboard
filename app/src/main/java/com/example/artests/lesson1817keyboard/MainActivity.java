@@ -1,18 +1,26 @@
 package com.example.artests.lesson1817keyboard;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    private long mButtonExitPressTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +34,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+            }
+        });
+        findViewById(R.id.editText2).setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus){
+                    Toast.makeText(getApplicationContext(),R.string.focusMessage,Toast.LENGTH_SHORT).show();
+                    ((EditText)findViewById(R.id.editText2)).setInputType(InputType.TYPE_CLASS_PHONE);
+                }
             }
         });
     }
@@ -55,7 +72,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
-        openQuitDialog();
+        //openQuitDialog();
+        doublePressButtonExit();
     }
 
     private void openQuitDialog(){
@@ -76,5 +94,64 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         quitDialog.show();
+    }
+
+    private void doublePressButtonExit(){
+        if (mButtonExitPressTime+2000>System.currentTimeMillis()){
+            finish();
+            //super.onBackPressed();
+        }
+        else{
+            Toast.makeText(this,getString(R.string.doubleExit),Toast.LENGTH_SHORT).show();
+
+        }
+        mButtonExitPressTime=System.currentTimeMillis();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode){
+            case KeyEvent.KEYCODE_MENU:
+                Toast.makeText(this,getString(R.string.menuPressButton),Toast.LENGTH_SHORT).show();
+                return true;
+            case KeyEvent.KEYCODE_SEARCH:
+                Toast.makeText(this,getString(R.string.searchPressButton),Toast.LENGTH_SHORT).show();
+                return true;
+            case KeyEvent.KEYCODE_VOLUME_UP:
+                event.startTracking();
+                //Toast.makeText(this,getString(R.string.volumeUpPressButton),Toast.LENGTH_SHORT).show();
+                return true;
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+                Toast.makeText(this,getString(R.string.volumeDownPressButton),Toast.LENGTH_SHORT).show();
+                return false;
+
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+        switch (keyCode){
+            case KeyEvent.KEYCODE_MENU:
+                Toast.makeText(this,getString(R.string.menuPressButtonLong),Toast.LENGTH_SHORT).show();
+                return true;
+            case KeyEvent.KEYCODE_SEARCH:
+                Toast.makeText(this,getString(R.string.searchPressButtonLong),Toast.LENGTH_SHORT).show();
+                return true;
+            case KeyEvent.KEYCODE_VOLUME_UP:
+                Toast.makeText(this,getString(R.string.volumeUpPressButtonLong),Toast.LENGTH_SHORT).show();
+                return false;
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+                Toast.makeText(this,getString(R.string.volumeDownPressButtonLong),Toast.LENGTH_SHORT).show();
+                return false;
+
+        }
+        return super.onKeyLongPress(keyCode, event);
+    }
+
+    public void onClickButton1(View view) {
+        InputMethodManager imm=(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        findViewById(R.id.editText2).clearFocus();
     }
 }
