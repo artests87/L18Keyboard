@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Lesson18(17)Keyboard</string>
+    <string name="action_settings">Settings</string>
+    <string name="titleDialogBack">Exit:Are you sure?</string>
+    <string name="yes">Yes!</string>
+    <string name="no">Nine!</string>
+</resources>
