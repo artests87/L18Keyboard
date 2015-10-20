@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="simpleButtonPress" type="id">Button press!</item>
+</resources>

@@ -14,4 +14,6 @@
     <string name="volumeUpPressButtonLong">You have pressed long  VUP!</string>
     <string name="volumeDownPressButtonLong">You have pressed long VDOWN!</string>
     <string name="focusMessage">You have got focus!!</string>
+    <string name="simpleButtonLongPress">Long button press!</string>
+    <string name="simpleButtonPress">Simpe bitton press!</string>
 </resources>

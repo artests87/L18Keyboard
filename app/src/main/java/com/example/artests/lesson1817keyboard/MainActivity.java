@@ -3,7 +3,6 @@ package com.example.artests.lesson1817keyboard;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,12 +14,14 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     private long mButtonExitPressTime;
+    private Button mButton1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        pressLongClickButton();
         findViewById(R.id.editText2).setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -46,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -153,5 +157,19 @@ public class MainActivity extends AppCompatActivity {
         InputMethodManager imm=(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         findViewById(R.id.editText2).clearFocus();
+    }
+
+    public void onClick(View view) {
+        Toast.makeText(this, getString(R.string.simpleButtonPress), Toast.LENGTH_SHORT).show();
+    }
+
+    private void pressLongClickButton() {
+        findViewById(R.id.button).setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(getApplicationContext(), getString(R.string.simpleButtonLongPress), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
     }
 }
